@@ -21,23 +21,47 @@ sys.path.append('../doubly_linked_list')
 
 from doubly_linked_list import DoublyLinkedList
 # Using an array data structure for storage: 
+# class Queue:
+#     def __init__(self):
+#         self.size = 0
+#         self.storage = []
+
+#     def __len__(self):
+#         return self.size
+
+# #enqueue - getting in line
+# #first in, first out
+#     def enqueue(self, value):
+#         self.storage.insert(0, value)
+#         self.size += 1
+
+# #dequeue - getting out of line
+#     def dequeue(self):
+#         if self.size > 0:
+#             self.size -= 1
+#             return self.storage.pop()
+#         return
+
+# Using doublylinkedlist as data structure for storage
 class Queue:
     def __init__(self):
         self.size = 0
-        self.storage = []
+        self.storage = DoublyLinkedList()
 
     def __len__(self):
+        #we could also iterate across the list and count as we go
         return self.size
 
-#enqueue - getting in line
-#first in, first out
     def enqueue(self, value):
-        self.storage.insert(0, value)
+        self.storage.add_to_tail(value)
         self.size += 1
 
-#dequeue - getting out of line
     def dequeue(self):
-        if self.size > 0:
-            self.size -= 1
-            return self.storage.pop()
-        return
+        if self.size == 0:
+            return None
+
+        removed_value = self.storage.remove_from_head()
+
+        self.size -= 1
+
+        return removed_value
