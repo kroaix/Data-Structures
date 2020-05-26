@@ -44,6 +44,33 @@ class DoublyLinkedList:
     def __len__(self):
         return self.length
 
+    def find_middle(self):
+        middle = self.head
+        end = self.head
+
+        #while 1 step forward is not none(tail) and 2 steps forward is not none
+        while end != None and end.next.next != None:
+            #take 2 steps forward
+            #move fast pointer 2 steps
+            end = end.next.next
+            #slow pointer 1 step
+            middle = middle.next
+
+            # #take a step forward if end is not None
+            # end = end.next
+            # #if end is still not none take another step forward
+            # if end != None:
+            #     end = end.next
+            #     middle = middle.next
+
+        return middle
+
+    #stretch goal
+    #head should now be tail - tail should now be head
+    #no recursion or other data structures 
+    def reverse_list(self):
+        pass
+
     """Wraps the given value in a ListNode and inserts it 
     as the new head of the list. Don't forget to handle 
     the old head node's previous pointer accordingly."""
@@ -172,7 +199,7 @@ class DoublyLinkedList:
 
         #keep moving until we reach the tail then stop
         while current_node is not None:
-            
+
             if current_node.value > highest_value:
                 highest_value = current_node.value
 
