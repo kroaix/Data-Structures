@@ -50,11 +50,11 @@ class Stack:
     # Last in first out
     def push(self, value):
         self.size += 1
-        self.storage.add_to_tail(value)
+        self.storage.add_to_head(value)
 
     # removing from the top
     # Last in first out
     def pop(self):
         if self.size:
             self.size -= 1
-            return self.storage.remove_tail()
+            return self.storage.remove_head()
