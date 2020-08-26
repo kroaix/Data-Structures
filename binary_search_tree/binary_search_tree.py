@@ -17,20 +17,88 @@ class BSTNode:
 
     # Insert the given value into the tree
     def insert(self, value):
-        pass
+        #compare target value to node value
+        #if value >= node.value
+        if value >= self.value:
+            #go right
+            #if node.right is none
+            if self.right is None:
+                #create new node there
+                self.right = BSTNode(value)
+            else: #self.right is a BSTNode
+                #do the same thing (recurse)
+                #insert value into node.right
+                #right_child is a BSTNode, so we can call insert on it
+                right_child = self.right
+                right_child.insert(value)
+
+        #else if value < node.value
+        if value < self.value:
+            #go left
+            #if node.left is none
+            if self.left is None:
+                #create node
+                self.left = BSTNode(value)
+            else:
+                #do the same thing
+                #compare and go left or right
+                #insert value into node.left
+                left_child = self.left
+                left_child.insert(value)
 
     # Return True if the tree contains the value
     # False if it does not
     def contains(self, target):
-        pass
+        # Compare target value to node.value
+        # If target == node.value:
+        if target == self.value:
+        # return True
+            return True
+
+        # If target > node.value:
+        if target > self.value:
+        # Go right
+        # If node.right is None:
+        # We've traversed the tree and haven't found it
+        # return False    
+            if self.right is None:
+                return False
+            else:
+            # return node.right.contains(target)
+                return self.right.contains(target)
+
+        # Else if target < node.value
+        if target < self.value:
+        # Go Left
+        # If node.left is None:
+        # return False
+            if self.left is None:
+                return False
+        # Else:
+            else:
+        # Do the same thing
+        # (compare, go left or right)
+        # return node.left.contains(target)
+                return self.left.contains(target)
 
     # Return the maximum value found in the tree
     def get_max(self):
-        pass
+        # the node with the maximum value will also be the right-most node
+        while self.right is not None:
+            self = self.right
+        
+        return self.value
 
     # Call the function `fn` on the value of each node
     def for_each(self, fn):
-        pass
+        # Will have to look at both branches
+        fn(self.value)
+
+        if self.left:
+            self.left.for_each(fn)
+            
+        if self.right:
+            self.right.for_each(fn)
 
     # Part 2 -----------------------
 
