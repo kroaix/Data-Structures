@@ -9,6 +9,9 @@ This part of the project comprises two days:
 2. Implement the `in_order_print`, `bft_print`, and `dft_print` methods
    on the BSTNode class.
 """
+from queue import Queue
+from stack import Stack
+
 class BSTNode:
     def __init__(self, value):
         self.value = value
@@ -114,18 +117,53 @@ class BSTNode:
     # Print all the values in order from low to high
     # Hint:  Use a recursive, depth first traversal
     def in_order_print(self, node):
-        pass
+        if self.left is not None:
+            node.left.in_order_print(node.left)
+            print(node.value)
+        else:
+            print(node.value)
+        
+        if node.right is not None:
+            node.right.in_order_print(node.right)
 
     # Print the value of every node, starting with the given node,
     # in an iterative breadth first traversal
     def bft_print(self, node):
-        pass
+        # Start at the root
+        queue = Queue()
+        # Push it onto the queue
+        queue.enqueue(node)
+        # While queue is not empty:
+        while len(queue) > 0:
+        # Cur_node = Remove from the queue
+            cur_node = queue.dequeue()
+        # Add cur_node children to the queue
+            if cur_node.left:
+                queue.enqueue(cur_node.left)
+            if cur_node.right:
+                queue.enqueue(cur_node.right) 
+        # Process cur_node
+            print(cur_node.value)
 
     # Print the value of every node, starting with the given node,
     # in an iterative depth first traversal
     def dft_print(self, node):
-        pass
-
+        # Start at the root
+        stack = Stack()
+        # Push it onto the stack
+        stack.push(node)
+        # While stack is not empty:
+        while len(stack) > 0:
+        # Cur_node = Remove from stack
+            cur_node = stack.pop()
+        # Add cur_node children to the stack
+            if cur_node.left:
+                stack.push(cur_node.left)
+            if cur_node.right:
+                stack.push(cur_node.right)
+        # Process cur_node
+            print(cur_node.value)
+            
     # Stretch Goals -------------------------
     # Note: Research may be required
 
